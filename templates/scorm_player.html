@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="assets/player.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <strong>{{ title }}</strong>
+    <span id="slideLabel">Slide 1 / {{ slide_count }}</span>
+  </div>
+
+  <div class="tools">
+    <button type="button" data-tool="pointer">Pointer</button>
+    <button type="button" data-tool="pen">Pen</button>
+    <button type="button" data-tool="highlighter">Highlighter</button>
+    <button type="button" data-tool="eraser">Eraser</button>
+    <input id="color" type="color" value="#ff0000" title="Warna pena">
+    <label class="size-control">Size <input id="size" type="range" min="1" max="30" value="4"></label>
+    <button type="button" id="undo">Undo</button>
+    <button type="button" id="clear">Clear</button>
+    <button type="button" id="fullscreen">Fullscreen</button>
+  </div>
+</header>
+
+<main>
+  <section id="stage">
+    <div id="slideFrame">
+      <img id="slideImage" alt="Slide presentasi" draggable="false">
+      <canvas id="ink"></canvas>
+    </div>
+  </section>
+
+  <nav class="navigation" aria-label="Navigasi slide">
+    <button type="button" id="prev">&#8592; Previous</button>
+    <div class="counter">
+      <input id="slideNumber" type="number" min="1" max="{{ slide_count }}" value="1">
+      <span>/ {{ slide_count }}</span>
+    </div>
+    <button type="button" id="next">Next &#8594;</button>
+  </nav>
+</main>
+
+<script>
+window.BEAMER_SCORM = {
+  title: {{ title|tojson }},
+  slides: {{ slide_files|tojson }},
+  slideCount: {{ slide_count }}
+};
+</script>
+<script src="assets/scorm.js"></script>
+<script src="assets/player.js"></script>
+</body>
+</html>
